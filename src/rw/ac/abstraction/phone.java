@@ -1,3 +1,5 @@
+package rw.ac.abstraction;
+
 interface Callable {
     void call();
 }
