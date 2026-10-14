@@ -14,7 +14,7 @@ public class AgeMain {
                 throw new AgeException("not allowed");
             }
         } catch (AgeException e) {
-            Sytem.out.println(e);
+            System.out.println(e);
         }
     }
 }
