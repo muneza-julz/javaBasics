@@ -1,35 +1,48 @@
 package hashCode;
 
-// class Student, has natural sorting algorithm in ascending order
+import java.util.Objects;
+
 public class Student implements Comparable<Student> {
+    private int id;
     private String firstName;
     private String lastName;
-    private int id;
     private double grade;
 
-    public Student(String fname, String lname, int id, double grade){
+    public Student(int id, String fname, String lname, double grade) {
+        this.id = id;
         this.firstName = fname;
         this.lastName = lname;
-        this.id = id;
         this.grade = grade;
     }
-    public double getGrade(){ return grade;}
 
-    public String getFirstName() {
-        return firstName;
-    }
-    public String getLastName() {
-        return lastName;
-    }
-    public int getId() {return id;}
-    @Override
-    public String toString(){ return "name: " + (firstName+lastName) + ", grade: " + grade;}
-
+    public int getId() { return id; }
+    public String getFirstName() { return firstName; }
+    public String getLastName() { return lastName; }
+    public double getGrade() { return grade; }
 
     @Override
-    public int compareTo(Student s2) {
-        return Integer.compare( this.id, s2.getId());
+    public String toString() {
+        return "id: " + id + ", " + firstName + " " + lastName + ", grade: " + grade;
     }
 
+    // Natural ordering: ascending by id
+    @Override
+    public int compareTo(Student other) {
+        return Integer.compare(this.id, other.id);
+    }
 
+    // Two students are equal if id and lastName match
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Student other = (Student) o;
+        return id == other.id && Objects.equals(lastName, other.lastName);
+    }
+
+    // Must use the same fields as equals()
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, lastName);
+    }
 }
